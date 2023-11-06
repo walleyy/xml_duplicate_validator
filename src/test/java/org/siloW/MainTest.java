@@ -12,7 +12,7 @@ class MainTest {
 
     @Test
     void findDuplicates() {
-        assertDoesNotThrow(()-> findDuplicate(incorrectXml,new B()));
+        assertDoesNotThrow(()-> findDuplicate(incorrectXml,new TestClass()));
     }
 
 }
