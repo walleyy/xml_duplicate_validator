@@ -50,7 +50,7 @@ public class Main {
     }
 
     private static List<Integer> findWord( String textString, String word) {
-        List<Integer> indexes = new ArrayList<Integer>();
+        List<Integer> indexes = new ArrayList<>();
         String lowerCaseTextString = textString.toLowerCase();
         String lowerCaseWord = word.toLowerCase();
 
