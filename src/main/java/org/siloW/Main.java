@@ -12,21 +12,22 @@ import java.util.List;
 
 public class Main {
 
-    /** This method should be used after verifying payload provided(xml), is correct.
+    /** This method should be used after verifying payload provided(XML), is correct.
      *  @implNote To call this method simply pass the xml and a new instance of class:
      *  @param xml The xml string to be checked
      *  @param theObject The new instance of class(POJO)
      *
-     *  @throws DuplicatedXmlField When duplicates are found
-     *  @throws ClassNotFoundException When you pass a class param not instantiated
+     *  @throws DuplicatedXmlField When duplicates are found.
+     *  @throws ClassNotFoundException When you pass a class param not instantiated.
+     *  @throws IncorrectXml When you pass incorrect XML string.
      *  @code findDuplicate(xml, new PoJo())*/
     public static void findDuplicate( String xml, Object theObject) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         if(xml == null ){
-            throw new RequiredParameter("xml input required");
+            throw new RequiredParameter("XML input required");
         }
 
         if(theObject == null){
-            throw new RequiredParameter("reference class object is required");
+            throw new RequiredParameter("Reference class object is required");
         }
 
         for (Field field : theObject.getClass().getDeclaredFields()) {

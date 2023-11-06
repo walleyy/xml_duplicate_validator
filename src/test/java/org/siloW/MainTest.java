@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.siloW.Main.findDuplicate;
 
 class MainTest {
-    String incorrectXml = "<c>name<c><cname</c>";
+    String incorrectXml = "<c>name<c><c>name</c><c>names<c>";
     String correctXml = "<c>name</c>";
 
 
