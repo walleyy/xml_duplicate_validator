@@ -1,6 +1,7 @@
 package org.siloW;
 
 import org.siloW.error.DuplicatedXmlField;
+import org.siloW.error.IncorrectXml;
 import org.siloW.error.RequiredParameter;
 
 import java.lang.reflect.Field;
@@ -10,7 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    /** This method should be used after verifying xml structure provided is correct */
+
+    /** This method should be used after verifying payload provided(xml), is correct.
+     *  @implNote To call this method simply pass the xml and a new instance of class:
+     *  @param xml The xml string to be checked
+     *  @param theObject The new instance of class(POJO)
+     *
+     *  @throws DuplicatedXmlField When duplicates are found
+     *  @throws ClassNotFoundException When you pass a class param not instantiated
+     *  @code findDuplicate(xml, new PoJo())*/
     public static void findDuplicate( String xml, Object theObject) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         if(xml == null ){
             throw new RequiredParameter("xml input required");
@@ -39,6 +48,8 @@ public class Main {
                     List<Integer> integerList = findWord(xml,field.getName());
                     if (integerList.size()> 2){
                         throw new DuplicatedXmlField(field.getName() +" is a duplicate");
+                    }else if(integerList.isEmpty() || integerList.size() == 1){
+                        throw new IncorrectXml("The given XML is not compliant with the class fields.");
                     }
                 }
             }
@@ -57,9 +68,15 @@ public class Main {
         int index = 0;
         while(index != -1){
             index = lowerCaseTextString.indexOf(lowerCaseWord, index);
-            if (index != -1) {
-                indexes.add(index);
-                index++;
+            if (index != -1 ) {
+                String afterChar = String.valueOf(lowerCaseTextString.charAt(index+ word.length()));
+                String beforeChar = String.valueOf(lowerCaseTextString.charAt(index-1));
+                if(afterChar.equals(">") && (beforeChar.equals("/") || beforeChar.equals("<"))) {
+                    indexes.add(index);
+                    index++;
+                }else {
+                    throw new IncorrectXml(lowerCaseWord + " field given not correct");
+                }
             }
         }
         return indexes;

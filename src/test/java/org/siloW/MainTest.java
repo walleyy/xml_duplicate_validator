@@ -1,19 +1,18 @@
 package org.siloW;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.siloW.Main.findDuplicate;
 
 class MainTest {
+    String incorrectXml = "<c>name<c><cname</c>";
+    String correctXml = "<c>name</c>";
 
-    public static class B{
-        String b;
 
-        public B(){}
-    }
-
-    @org.junit.jupiter.api.Test
+    @Test
     void findDuplicates() {
-        String xml = "<b>name<b>";
-        assertDoesNotThrow(()-> findDuplicate(xml,new B()));
+        assertDoesNotThrow(()-> findDuplicate(incorrectXml,new B()));
     }
+
 }
