@@ -30,6 +30,10 @@ public class Main {
             throw new RequiredParameter("Reference class object is required");
         }
 
+        if(!String.valueOf(xml.charAt(0)).equals("<")){
+            throw new IncorrectXml("The given XML is not compliant with the class fields.");
+        }
+
         for (Field field : theObject.getClass().getDeclaredFields()) {
             if(isJavaOrCustom(field.getType())){
                 if(List.class == field.getType()){
