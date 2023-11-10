@@ -1,4 +1,5 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.walleyy/xml_duplicate_validator/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/io.github.walleyy/xml_duplicate_validator)
+
 # xml_duplicate_validator
 
 ### Library which aims to validate XML received from API.
