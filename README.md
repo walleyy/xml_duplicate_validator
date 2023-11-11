@@ -8,7 +8,7 @@ Contains one method which receive the xml and a new instance of class:
 ### Usage
 simply call findDuplicate method and handle the exception returned
 ```
- findDuplicate(xml, new POJO());
+ XmlValidator.findDuplicate(xml, new POJO());
  ......
  xml param => XML string to be validated
  new POJO() param => a class that will be used in mapping back XML
