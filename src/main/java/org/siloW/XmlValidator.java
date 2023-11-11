@@ -9,8 +9,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class Main {
+public class XmlValidator {
 
     /** This method should be used after verifying payload provided(XML), is correct.
      *  @implNote To call this method simply pass the xml and a new instance of class:
@@ -67,8 +68,8 @@ public class Main {
 
     private static List<Integer> findWord( String textString, String word) {
         List<Integer> indexes = new ArrayList<>();
-        String lowerCaseTextString = textString.toLowerCase();
-        String lowerCaseWord = word.toLowerCase();
+        String lowerCaseTextString = textString.toLowerCase(Locale.ROOT);
+        String lowerCaseWord = word.toLowerCase(Locale.ROOT);
 
         int index = 0;
         while(index != -1){
@@ -80,7 +81,11 @@ public class Main {
                     indexes.add(index);
                     index++;
                 }else {
-                    throw new IncorrectXml(lowerCaseWord + " field given not correct");
+                    if (!afterChar.equals(">")){
+                        throw new IncorrectXml("\nclass field ::: ["+word + "] found but suffix should not have <" + afterChar+ "/" + afterChar.toUpperCase(Locale.ROOT)+ ">,\nkindly check xml fields if are correct or present in the provided class.");
+                    }else {
+                        throw new IncorrectXml("\nclass field ::: ["+word + "] found but prefix should not have <" + beforeChar+ "/" + beforeChar.toUpperCase(Locale.ROOT)+ ">,\nkindly check xml fields if are correct or present in the provided class.");
+                    }
                 }
             }
         }
